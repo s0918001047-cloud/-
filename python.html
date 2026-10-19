@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python 程式設計與運算思維入門講義</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Skulpt 用於網頁端執行 Python 代碼 -->
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+        .smooth-scroll { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 smooth-scroll flex flex-col min-h-screen">
+
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-indigo-600 text-white p-2 rounded-lg font-bold text-xl">
+                    <i class="fa-brands fa-python"></i>
+                </div>
+                <span class="font-bold text-xl text-slate-900 tracking-tight">Python 運算思維講義</span>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium text-slate-600">
+                <a href="#ct" class="hover:text-indigo-600 transition">1. 運算思維</a>
+                <a href="#programming" class="hover:text-indigo-600 transition">2. 程式設計</a>
+                <a href="#python" class="hover:text-indigo-600 transition">3. Python 特性</a>
+                <a href="#env" class="hover:text-indigo-600 transition">4. 開發環境</a>
+                <a href="#playground" class="hover:text-indigo-600 transition">5. 互動練習區</a>
+                <a href="#summary" class="hover:text-indigo-600 transition">6. 重點總結</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <section class="bg-gradient-to-r from-indigo-600 to-blue-700 rounded-2xl p-8 sm:p-12 text-white shadow-xl">
+            <div class="max-w-3xl space-y-4">
+                <span class="bg-indigo-500/30 text-indigo-100 text-xs font-semibold px-3 py-1 rounded-full border border-indigo-300/30">單元 01</span>
+                <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight">運算思維與 Python 程式設計</h1>
+                <p class="text-indigo-100 text-lg leading-relaxed">
+                    邁入大數據與人工智慧時代，學習程式設計不僅是掌握一門語言，更是訓練邏輯解決問題的思考習慣。本章將帶你從零了解運算思維與 Python 基礎開發環境。
+                </p>
+            </div>
+        </section>
+
+        <section id="ct" class="bg-white rounded-xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+            <div class="border-b border-slate-100 pb-4 flex items-center space-x-3">
+                <span class="text-indigo-600 text-2xl"><i class="fa-solid fa-brain"></i></span>
+                <h2 class="text-2xl font-bold text-slate-900">1.1 認識運算思維 (Computational Thinking)</h2>
+            </div>
+            
+            <p class="text-slate-600 leading-relaxed">
+                2006 年，美國電腦科學家 Jeannette M. Wing 提出「運算思維」概念。主張運算思維是運用電腦科學的基礎概念來拆解與解決問題的邏輯思考過程，如同閱讀、寫字與算術一樣，應成為每個人的基本技能。
+            </p>
+
+            <h3 class="text-lg font-bold text-slate-800 pt-2">運算思維四大核心要素：</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 hover:border-indigo-300 transition">
+                    <div class="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center font-bold mb-3">1</div>
+                    <h4 class="font-bold text-slate-900 mb-1">拆解問題 (Decomposition)</h4>
+                    <p class="text-sm text-slate-600">將複雜的大問題或資料拆解成數個較小、易於處理的小問題。</p>
+                </div>
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 hover:border-indigo-300 transition">
+                    <div class="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center font-bold mb-3">2</div>
+                    <h4 class="font-bold text-slate-900 mb-1">發現規律 (Pattern Recognition)</h4>
+                    <p class="text-sm text-slate-600">觀察過往經驗或資料中的重複模式、趨勢與規則。</p>
+                </div>
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 hover:border-indigo-300 transition">
+                    <div class="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center font-bold mb-3">3</div>
+                    <h4 class="font-bold text-slate-900 mb-1">抽象化 (Abstraction)</h4>
+                    <p class="text-sm text-slate-600">聚焦於核心重點，過濾不必要的細節，歸納出通用原則。</p>
+                </div>
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 hover:border-indigo-300 transition">
+                    <div class="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center font-bold mb-3">4</div>
+                    <h4 class="font-bold text-slate-900 mb-1">設計演算法 (Algorithm Design)</h4>
+                    <p class="text-sm text-slate-600">建立按部就班的明確步驟，藉此解決相同或類似的問題。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="programming" class="bg-white rounded-xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+            <div class="border-b border-slate-100 pb-4 flex items-center space-x-3">
+                <span class="text-indigo-600 text-2xl"><i class="fa-solid fa-code"></i></span>
+                <h2 class="text-2xl font-bold text-slate-900">1.2 程式設計是運算思維的體現</h2>
+            </div>
+            
+            <p class="text-slate-600 leading-relaxed">
+                電腦底層由極多微小的電子開關構成，僅能辨識 <code class="bg-slate-100 text-pink-600 px-1.5 py-0.5 rounded font-mono text-sm">0</code> 與 <code class="bg-slate-100 text-pink-600 px-1.5 py-0.5 rounded font-mono text-sm">1</code>（機器語言）。為了與電腦溝通，人類使用「程式語言」撰寫指令，再轉譯給電腦執行。撰寫程式能將運算思維中的抽象概念（如變數、迴圈、判斷邏輯）具體落實。
+            </p>
+
+            <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                <h3 class="text-md font-bold text-slate-800 mb-4 text-center">完整的軟體開發與程式設計五大步驟</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 text-center">
+                    <div class="bg-white p-3 rounded-lg shadow-sm border border-slate-200">
+                        <i class="fa-solid fa-magnifying-glass text-indigo-500 mb-2"></i>
+                        <div class="text-sm font-bold">1. 分析問題</div>
+                    </div>
+                    <div class="bg-white p-3 rounded-lg shadow-sm border border-slate-200">
+                        <i class="fa-solid fa-diagram-project text-indigo-500 mb-2"></i>
+                        <div class="text-sm font-bold">2. 設計流程</div>
+                    </div>
+                    <div class="bg-white p-3 rounded-lg shadow-sm border border-slate-200">
+                        <i class="fa-solid fa-keyboard text-indigo-500 mb-2"></i>
+                        <div class="text-sm font-bold">3. 程式編碼</div>
+                    </div>
+                    <div class="bg-white p-3 rounded-lg shadow-sm border border-slate-200">
+                        <i class="fa-solid fa-vial text-indigo-500 mb-2"></i>
+                        <div class="text-sm font-bold">4. 功能測試</div>
+                    </div>
+                    <div class="bg-white p-3 rounded-lg shadow-sm border border-slate-200">
+                        <i class="fa-solid fa-bug text-indigo-500 mb-2"></i>
+                        <div class="text-sm font-bold">5. 程式除錯</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="python" class="bg-white rounded-xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+            <div class="border-b border-slate-100 pb-4 flex items-center space-x-3">
+                <span class="text-indigo-600 text-2xl"><i class="fa-brands fa-python"></i></span>
+                <h2 class="text-2xl font-bold text-slate-900">1.3 Python 程式語言簡介</h2>
+            </div>
+            
+            <p class="text-slate-600 leading-relaxed">
+                Python 由吉多·范羅蘇姆 (Guido van Rossum) 於 1989 年底開發，並於 1991 年公開發佈。Python 具備簡潔優雅的語法結構與強大的擴充性，是目前人工智慧、數據分析、網頁開發的首選語言。
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex items-start space-x-3 p-4 bg-slate-50 rounded-lg">
+                    <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                    <div>
+                        <h4 class="font-bold text-slate-800">簡單易學與可讀性高</h4>
+                        <p class="text-sm text-slate-600">語法接近英文自然語言，減少繁瑣符號，降低學習門檻。</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3 p-4 bg-slate-50 rounded-lg">
+                    <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                    <div>
+                        <h4 class="font-bold text-slate-800">直譯式語言 (Interpreted)</h4>
+                        <p class="text-sm text-slate-600">無需預先編譯即可逐行執行，利於快速開發與測試。</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3 p-4 bg-slate-50 rounded-lg">
+                    <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                    <div>
+                        <h4 class="font-bold text-slate-800">跨平台可移植性</h4>
+                        <p class="text-sm text-slate-600">支援 Windows、macOS 與 Linux 等多種作業系統。</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3 p-4 bg-slate-50 rounded-lg">
+                    <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                    <div>
+                        <h4 class="font-bold text-slate-800">豐富多元的套件生態</h4>
+                        <p class="text-sm text-slate-600">擁有龐大的第三方函式庫（如 NumPy, Pandas, Matplotlib）。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="env" class="bg-white rounded-xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+            <div class="border-b border-slate-100 pb-4 flex items-center space-x-3">
+                <span class="text-indigo-600 text-2xl"><i class="fa-solid fa-desktop"></i></span>
+                <h2 class="text-2xl font-bold text-slate-900">1.4 開發環境：Anaconda & Spyder</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <h3 class="text-lg font-bold text-slate-800">1. Anaconda 開發懶人包</h3>
+                <p class="text-slate-600">Anaconda 是專為科學計算與數據分析整合的免費 Python 發行版，內建 Anaconda Navigator 圖形化介面、Jupyter Notebook 與 Spyder IDE。</p>
+                
+                <div class="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg">
+                    <div class="flex items-center space-x-2 text-amber-800 font-bold mb-1">
+                        <i class="fa-solid fa-terminal"></i>
+                        <span>常用命令列操作 (Anaconda Prompt)</span>
+                    </div>
+                    <p class="text-xs text-amber-700 font-mono bg-amber-100/50 p-2 rounded">
+                        # 查詢已安裝套件<br>
+                        conda list  (或 pip list)
+                    </p>
+                </div>
+            </div>
+
+            <div class="space-y-4 pt-2">
+                <h3 class="text-lg font-bold text-slate-800">2. Spyder IDE 簡介與除錯工具</h3>
+                <p class="text-slate-600">Spyder 包含三大主要區域：<strong>程式編輯區</strong>、<strong>變數/檔案瀏覽區</strong> 與 <strong>IPython 命令列視窗區</strong>。</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 border border-slate-200 rounded-lg">
+                        <h4 class="font-bold text-slate-800 mb-2"><i class="fa-solid fa-bolt text-indigo-500 mr-2"></i>快捷與提示技巧</h4>
+                        <ul class="text-sm text-slate-600 space-y-1 list-disc list-inside">
+                            <li><strong>Tab 鍵：</strong> 啟用智慧補全（列出變數、函式與關鍵字）。</li>
+                            <li><strong>語法即時檢查：</strong> 若有錯誤，程式列左側會顯示黃/紅警告圖示 <i class="fa-solid fa-triangle-exclamation text-amber-500"></i>。</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 border border-slate-200 rounded-lg">
+                        <h4 class="font-bold text-slate-800 mb-2"><i class="fa-solid fa-bug text-indigo-500 mr-2"></i>除錯 (Debugging) 技巧</h4>
+                        <ul class="text-sm text-slate-600 space-y-1 list-disc list-inside">
+                            <li><strong>設定中斷點：</strong> 在程式行數左側按雙擊或按 <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-xs">F12</kbd>。</li>
+                            <li><strong>單步執行：</strong> 控制程式按步驟逐行分析變數變化。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="playground" class="bg-white rounded-xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+            <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <span class="text-indigo-600 text-2xl"><i class="fa-solid fa-play"></i></span>
+                    <h2 class="text-2xl font-bold text-slate-900">1.5 互動式程式碼練習區</h2>
+                </div>
+                <span class="text-xs bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-full font-semibold">即時運行 Python</span>
+            </div>
+
+            <p class="text-slate-600 text-sm">直接點擊下方按鈕測試講義中的範例程式碼：</p>
+
+            <div class="space-y-4">
+                <!-- Code Editor Container -->
+                <div class="border border-slate-300 rounded-xl overflow-hidden shadow-sm">
+                    <div class="bg-slate-800 text-slate-300 px-4 py-2 text-xs flex justify-between items-center font-mono">
+                        <span>main.py</span>
+                        <div class="space-x-2">
+                            <button onclick="loadSample('loop')" class="hover:text-white bg-slate-700 px-2 py-1 rounded">載入迴圈範例</button>
+                            <button onclick="loadSample('debug')" class="hover:text-white bg-slate-700 px-2 py-1 rounded">載入語法測試</button>
+                        </div>
+                    </div>
+                    <textarea id="python-code" class="w-full h-44 p-4 bg-slate-900 text-emerald-400 font-mono text-sm focus:outline-none resize-y" spellcheck="false"># 運算思維實踐：計算 1 到 10 的累加和
+total = 0
+for i in range(1, 11):
+    total += i
+    print(f"第 {i} 次執行迴圈，當前累計: {total}")
+
+print("1 到 10 加總結果為:", total)</textarea>
+                </div>
+
+                <!-- Run Button -->
+                <div class="flex justify-end">
+                    <button onclick="runPython()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-5 py-2 rounded-lg shadow-sm transition flex items-center space-x-2">
+                        <i class="fa-solid fa-play text-sm"></i>
+                        <span>執行程式 (Run Code)</span>
+                    </button>
+                </div>
+
+                <!-- Console Output -->
+                <div class="bg-slate-900 rounded-xl p-4 border border-slate-800">
+                    <div class="text-xs font-mono text-slate-400 mb-2 flex justify-between">
+                        <span>Console Output:</span>
+                        <button onclick="clearConsole()" class="hover:text-slate-200">清空</button>
+                    </div>
+                    <pre id="console-output" class="font-mono text-xs text-slate-200 whitespace-pre-wrap min-h-[80px]">點擊「執行程式」後結果將顯示於此...</pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="summary" class="bg-white rounded-xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+            <div class="border-b border-slate-100 pb-4 flex items-center space-x-3">
+                <span class="text-indigo-600 text-2xl"><i class="fa-solid fa-list-check"></i></span>
+                <h2 class="text-2xl font-bold text-slate-900">1.6 本章重點整理與觀念微測驗</h2>
+            </div>
+
+            <ul class="space-y-2 text-slate-700 text-sm list-disc list-inside bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <li><strong>運算思維四大面向：</strong>拆解問題、發現規律、歸納概念（抽象化）、設計演算法。</li>
+                <li><strong>Python 特性：</strong>直譯式、高階、跨平台、開源且擁有豐富模組套件庫。</li>
+                <li><strong>整合開發環境 (IDE)：</strong>Spyder 內建智慧輸入補全 (<kbd class="px-1 bg-white border rounded text-xs">Tab</kbd>) 與單步除錯功能 (<kbd class="px-1 bg-white border rounded text-xs">F12</kbd> 設定中斷點)。</li>
+            </ul>
+
+            <!-- Interactive Quiz -->
+            <div class="pt-4 space-y-4">
+                <h3 class="font-bold text-slate-800">觀念小隨堂測</h3>
+                <div class="p-4 bg-indigo-50/50 rounded-xl border border-indigo-100 space-y-3">
+                    <p class="text-sm font-medium text-slate-800">Q: 在 Spyder 編輯器中，輸入部分變數名稱後按哪一個按鍵可以開啟智慧補全提示選單？</p>
+                    <div class="flex flex-wrap gap-2 text-sm">
+                        <button onclick="checkQuiz(this, false)" class="bg-white hover:bg-indigo-100 px-4 py-2 rounded-lg border border-slate-200 transition">Enter 鍵</button>
+                        <button onclick="checkQuiz(this, true)" class="bg-white hover:bg-indigo-100 px-4 py-2 rounded-lg border border-slate-200 transition">Tab 鍵</button>
+                        <button onclick="checkQuiz(this, false)" class="bg-white hover:bg-indigo-100 px-4 py-2 rounded-lg border border-slate-200 transition">Shift 鍵</button>
+                        <button onclick="checkQuiz(this, false)" class="bg-white hover:bg-indigo-100 px-4 py-2 rounded-lg border border-slate-200 transition">F12 鍵</button>
+                    </div>
+                    <div id="quiz-result" class="text-xs font-semibold hidden"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-6 text-center text-xs mt-12 border-t border-slate-800">
+        <p>Python 程式語言與運算思維教學講義 | 本網頁教材為自製開放教學資源</p>
+    </footer>
+
+    <script>
+        // 設定 Skulpt 執行環境
+        function outf(text) {
+            const output = document.getElementById("console-output");
+            output.innerHTML += text;
+        }
+
+        function builtinRead(x) {
+            if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+                throw "File not found: '" + x + "'";
+            return Sk.builtinFiles["files"][x];
+        }
+
+        function runPython() {
+            const code = document.getElementById("python-code").value;
+            const output = document.getElementById("console-output");
+            output.innerHTML = "";
+            
+            Sk.pre = "console-output";
+            Sk.configure({ output: outf, read: builtinRead });
+
+            try {
+                Sk.importMainWithBody("<stdin>", false, code, true);
+            } catch (err) {
+                output.innerHTML = "<span class='text-red-400'>" + err.toString() + "</span>";
+            }
+        }
+
+        function clearConsole() {
+            document.getElementById("console-output").innerText = "";
+        }
+
+        function loadSample(type) {
+            const editor = document.getElementById("python-code");
+            if (type === 'loop') {
+                editor.value = `# 運算思維實踐：計算 1 到 10 的累加和\ntotal = 0\nfor i in range(1, 11):\n    total += i\n    print(f"第 {i} 次執行迴圈，當前累計: {total}")\n\nprint("1 到 10 加總結果為:", total)`;
+            } else if (type === 'debug') {
+                editor.value = `# 測試語法除錯範例\na = 10\nb = 20\n# 下方變數 c 計算結果\nresult = a + b\nprint("計算結果等於:", result)`;
+            }
+        }
+
+        function checkQuiz(btn, isCorrect) {
+            const resultDiv = document.getElementById("quiz-result");
+            resultDiv.classList.remove("hidden");
+            if (isCorrect) {
+                resultDiv.className = "text-xs font-semibold text-emerald-600 mt-2";
+                resultDiv.innerText = "✓ 正確！在 Spyder 中按下 Tab 鍵即可觸發智慧提示補全選單。";
+            } else {
+                resultDiv.className = "text-xs font-semibold text-rose-600 mt-2";
+                resultDiv.innerText = "✕ 不太對喔，再試一次看看！";
+            }
+        }
+    </script>
+</body>
+</html>
